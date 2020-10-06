@@ -42,3 +42,17 @@ for i in range(len(salespeople)):
 # REFACTORED VERSION 
 """Generate sales report showing total melons each salesperson sold."""
 
+sales_byperson= {}
+
+f = open('sales-report.txt')
+for line in f:
+    line = line.rstrip() # Remove trailing whitespace after each line
+    entries = line.split('|') # Splits lines into lists by '|'
+
+
+    if entries[0] not in sales_byperson:
+        sales_byperson[entries[0]] = 0
+
+    sales_byperson += entries[2]
+
+    
