@@ -1,6 +1,5 @@
 
 
-#If you have time, feel free to implement your suggested improvements
 
 """Generate sales report showing total melons each salesperson sold."""
 
@@ -53,6 +52,7 @@ for line in f:
     if entries[0] not in sales_byperson:
         sales_byperson[entries[0]] = 0
 
-    sales_byperson += entries[2]
+    sales_byperson[entries[0]] = entries[2]
 
-    
+for key, value in sales_byperson.items():
+    print(f"{key} sold {value} melons")
