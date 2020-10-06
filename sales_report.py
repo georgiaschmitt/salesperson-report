@@ -41,18 +41,39 @@ for i in range(len(salespeople)):
 # REFACTORED VERSION 
 """Generate sales report showing total melons each salesperson sold."""
 
-sales_byperson= {}
+def salespeople_melon_sales(filepath):
+    """Return a dictionary of {salesperson_name: melons_sold}.
 
-f = open('sales-report.txt')
-for line in f:
-    line = line.rstrip() # Remove trailing whitespace after each line
-    entries = line.split('|') # Splits lines into lists by '|'
+    Arguments:
+        filepath (str) - the path to a sales report log
 
+    Return:
+        sales_byperson (dict)
+    """
 
-    if entries[0] not in sales_byperson:
-        sales_byperson[entries[0]] = 0
+    
+    sales_byperson= {}
 
-    sales_byperson[entries[0]] = entries[2]
+    f = open('sales-report.txt')
+    for line in f:
+        line = line.rstrip() # Remove trailing whitespace after each line
+        name, salesdollars, melons = line.split('|') # Splits lines into lists by '|'
 
-for key, value in sales_byperson.items():
-    print(f"{key} sold {value} melons")
+        if name not in sales_byperson:
+            sales_byperson[name] = int(melons)
+        else:
+            sales_byperson[name] += int(melons)
+
+    return sales_byperson
+
+def print_salesreport(sales_byperson):
+    """Print a report of salespeople and their total number of melons sold.
+
+    Arguments:
+        sales_byperson (dict) - {salesperson_name: melons_sold}
+    """
+
+    for key, value in sales_byperson.items():
+        print(f"{key} sold {value} melons")
+
+print_salesreport(salespeople_melon_sales('sales-report.txt'))
